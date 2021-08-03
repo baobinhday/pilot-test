@@ -1,0 +1,9 @@
+.table-container {
+  .MuiTableHead-root {
+    background: rgba(0, 0, 0, 0.1);
+  }
+  .MuiTableRow-root:hover {
+    background: rgba(0, 0, 0, 0.05);
+    cursor: default;
+  }
+}

@@ -1,0 +1,11 @@
+.table-detail {
+  &__title {
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+  &__des {
+    text-align: center;
+    margin-top: 24px;
+  }
+}

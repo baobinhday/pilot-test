@@ -1,0 +1,29 @@
+.gnb-wrapper {
+  display: flex;
+  align-items: center;
+  .gnb__menu {
+    display: flex;
+    align-items: center;
+
+    &--mega {
+      // .menu-item {
+      //   padding: 3px 0 0 0;
+      //   &__popover {
+      //     padding: 0 0 3px 0;
+      //   }
+      //   &:first-child {
+      //     padding: 3px 0 0 3px;
+      //     .menu-item__popover {
+      //       padding: 0 0 3px 3px;
+      //     }
+      //   }
+      //   &:last-child {
+      //     padding: 3px 3px 0 0;
+      //     .menu-item__popover {
+      //       padding: 0 3px 3px 0;
+      //     }
+      //   }
+      // }
+    }
+  }
+}

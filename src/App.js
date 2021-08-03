@@ -1,24 +1,37 @@
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
+
+import "react-grid-layout/css/styles.css";
+import "react-resizable/css/styles.css";
 import logo from './logo.svg';
 import './App.css';
+import GNB from "./components/GNB/GNB";
+import InteractionClick from "./pages/interaction/InteractionClick";
+import TableDetail from "./pages/tableDetail/TableDetail";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className="App">
+        <header className="App-header">
+          <GNB />
+        </header>
+        <div className="App-page">
+          <Switch>
+            <Route path="/click">
+              <InteractionClick />
+            </Route>
+            <Route path="/detail">
+              <TableDetail />
+            </Route>
+          </Switch>
+        </div>
+      </div>
+    </Router>
   );
 }
 

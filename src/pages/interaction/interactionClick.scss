@@ -1,0 +1,82 @@
+.interation-click {
+  .table-zone, .card-zone {
+    display: flex;
+    width: 100%;
+  }
+  .card-zone {
+    margin-top: 24px;
+  }
+  .card-item {
+    padding: 6px 12px;
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+    .custom-card {
+      width: 30%;
+    }
+    .type-click {
+      cursor: pointer;
+      text-decoration: underline;
+      &:hover {
+        font-weight: bold;
+      }
+    }
+  }
+  .table-item {
+    padding: 6px 12px;
+    flex: 1;
+    .type-click {
+      cursor: pointer;
+      color: blue;
+      text-decoration: underline;
+      &:hover {
+        color: cornflowerblue;
+      }
+    }
+  }
+  .selected-item {
+    width: 30%;
+    text-align: left;
+    border-left: 1px solid gray;
+    padding: 6px 12px;
+    position: relative;
+    &__title {
+      font-weight: bold;
+      font-size: 16px;
+      line-height: 1.5;
+    }
+    &__sub {
+      font-size: 10px;
+      line-height: 1.5;
+    }
+    &__des {
+      text-align: center;
+      margin-top: 24px;
+    }
+    &__icon {
+      position: absolute;
+      top: 0;
+      right: 0;
+    }
+  }
+
+  &__dialog {
+    .selected-popup-item__des {
+      width: 300px;
+      height: 200px;
+    }
+  }
+
+  &__select-type {
+    &.MuiFormControl-root {
+      margin-left: 30px;
+      flex-direction: row;
+      align-items: center;
+    }
+    .MuiFormGroup-root {
+      margin-left: 12px;
+      flex-direction: row;
+    }
+  }
+}
