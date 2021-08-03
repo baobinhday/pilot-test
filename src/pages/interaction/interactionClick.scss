@@ -1,17 +1,25 @@
 .interation-click {
+  &__title {
+    font-weight: bold;
+    display: block;
+    padding: 6px 0;
+    margin-bottom: 12px;
+  }
   .table-zone, .card-zone {
     display: flex;
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.5);
     width: 100%;
+    margin-top: 36px;
   }
-  .card-zone {
-    margin-top: 24px;
-  }
+
   .card-item {
-    padding: 6px 12px;
+    padding: 6px 24px 12px;
     flex: 1;
-    display: flex;
-    justify-content: space-between;
-    cursor: pointer;
+    
+    &__list {
+      display: flex;
+      justify-content: space-between;
+    }
     .custom-card {
       width: 30%;
     }
@@ -24,7 +32,7 @@
     }
   }
   .table-item {
-    padding: 6px 12px;
+    padding: 6px 24px;
     flex: 1;
     .type-click {
       cursor: pointer;
@@ -36,11 +44,14 @@
     }
   }
   .selected-item {
-    width: 30%;
     text-align: left;
-    border-left: 1px solid gray;
-    padding: 6px 12px;
+    border-left: 1px solid rgba(0, 0, 0, 0.1);
     position: relative;
+    transition: width 0.15s ease-in-out;
+    transition: opacity 0.2s ease-in-out;
+    &__content {
+      padding: 6px 24px;
+    }
     &__title {
       font-weight: bold;
       font-size: 16px;
@@ -51,20 +62,38 @@
       line-height: 1.5;
     }
     &__des {
-      text-align: center;
+      text-align: justify;
       margin-top: 24px;
+      font-size: 13px;
     }
-    &__icon {
+    &__more {
       position: absolute;
-      top: 0;
-      right: 0;
+      top: 54px;
+      right: 6px;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      border-radius: 3px;
+      padding: 2px;
+    }
+    &__header {
+      background: rgba(0, 0, 0, 0.03);
+      display: flex;
+      justify-content: flex-end;
+    }
+    &--hidden {
+      width: 0;
+      overflow: hidden;
+      opacity: 0;
+    }
+    &--show {
+      width: 30%;
+      opacity: 1;
     }
   }
 
   &__dialog {
     .selected-popup-item__des {
-      width: 300px;
-      height: 200px;
+      max-width: 400px;
+      min-width: 100px;
     }
   }
 

@@ -6,4 +6,10 @@
     background: rgba(0, 0, 0, 0.05);
     cursor: default;
   }
+  .table-cell--trunk {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 500px;
+  }
 }

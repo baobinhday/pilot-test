@@ -1,0 +1,25 @@
+.interaction-detail {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  &__title {
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 1.5;
+    display: flex;
+    align-items: center;
+    padding: 16px 24px;
+  }
+  &__des {
+    margin: 12px;
+    flex: 1;
+    text-align: center;
+    margin-top: 24px;
+  }
+  &__back, .MuiIconButton-root {
+    border-radius: 3px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 3px;
+    margin-right: 12px;
+  }
+}

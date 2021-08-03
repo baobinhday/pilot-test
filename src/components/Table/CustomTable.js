@@ -7,6 +7,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import classNames from 'classnames';
 import "./customTable.scss";
+import CustomTooltip from 'components/Tooltip/CustomTooltip';
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -56,14 +57,19 @@ const CustomTable = ({ rows, header, classExt, ...other }) => {
   }
 
   useEffect(() => {
-    const newData = stableSort(rows, getComparator(order, orderBy));
+    const row0 = rows.length ? rows[0] : null;
+    let newOrderBy = orderBy;
+    if (row0 && row0[`raw_${orderBy}`]) {
+      newOrderBy = `raw_${orderBy}`;
+    }
+    const newData = stableSort(rows, getComparator(order, newOrderBy));
     setData(newData);
   }, [rows, order, orderBy])
 
-  useEffect(() => {
-    const listHeaderSort = header.filter(item => item.sortable);
-    setOrderBy(listHeaderSort && listHeaderSort.length ? listHeaderSort[0].id : "");
-  }, [header])
+  // useEffect(() => {
+  //   const listHeaderSort = header.filter(item => item.sortable);
+  //   setOrderBy(listHeaderSort && listHeaderSort.length ? listHeaderSort[0].id : "");
+  // }, [header])
 
   return (
     <Table className={classNames("table-container", classExt)} aria-label="table">
@@ -92,7 +98,15 @@ const CustomTable = ({ rows, header, classExt, ...other }) => {
         {data.map((row) => (
           <TableRow key={row.id} onClick={onRowClick(row)}>
             {header.map(item => (
-              <TableCell key={item.id}>{row[item.id]}</TableCell>
+              item.trunk ? (
+                <TableCell className="table-cell--trunk" key={item.id}>
+                  <CustomTooltip title={row[item.id]} placement="bottom">
+                    <span>{row[item.id]}</span>
+                  </CustomTooltip>
+                </TableCell>
+              ) : (
+                <TableCell key={item.id}>{row[item.id]}</TableCell>
+              )
             ))}
           </TableRow>
         ))}

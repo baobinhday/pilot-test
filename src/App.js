@@ -11,7 +11,7 @@ import logo from './logo.svg';
 import './App.css';
 import GNB from "./components/GNB/GNB";
 import InteractionClick from "./pages/interaction/InteractionClick";
-import TableDetail from "./pages/tableDetail/TableDetail";
+import InteractionDetail from "./pages/interaction/InteractionDetail";
 
 function App() {
   return (
@@ -26,7 +26,7 @@ function App() {
               <InteractionClick />
             </Route>
             <Route path="/detail">
-              <TableDetail />
+              <InteractionDetail />
             </Route>
           </Switch>
         </div>

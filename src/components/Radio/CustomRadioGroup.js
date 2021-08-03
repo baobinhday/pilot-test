@@ -11,7 +11,13 @@ const CustomRadioGroup = ({ title, value, handleChange, options, classExt }) => 
     <FormLabel component="legend">{title}</FormLabel>
     <RadioGroup aria-label="custom-radio" name={value} value={value} onChange={handleChange}>
       {options.map(option => (
-        <FormControlLabel value={option.value} control={<Radio />} label={option.text} disabled={option.disabled} />
+        <FormControlLabel
+          value={option.value}
+          control={<Radio />}
+          label={option.text}
+          disabled={option.disabled}
+          key={option.value}
+        />
       ))}
     </RadioGroup>
   </FormControl>

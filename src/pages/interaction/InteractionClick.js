@@ -1,12 +1,8 @@
 import { useState } from 'react';
 import { useHistory } from "react-router-dom";
-
 import "./interactionClick.scss";
-import CustomTable from '../../components/Table/CustomTable';
-import SimpleDialog from '../../components/Dialog/SimpleDialog';
-import CustomRadioGroup from '../../components/Radio/CustomRadioGroup';
+import { CustomTable, SimpleDialog, CustomRadioGroup, CustomCard } from 'components';
 import SelectionItem from './SelectionItem';
-import CustomCard from '../../components/Card/CustomCard';
 import { LIST_CARD, RADIO_OPTIONS, TABLE_HEADER, TABLE_TASK } from './config';
 
 const InteractionClick = () => {
@@ -36,26 +32,31 @@ const InteractionClick = () => {
     }
   }
 
+  const onCloseRowPanel = () => {
+    setSelectedRow(null);
+  }
+
+  const onCloseCardPanel = () => {
+    setSelectedCard(null);
+  }
+
   const handleOpenUrl = (item) => {
     history.push({
-      pathname: "detail",
-      state: {
-        data: item
-      }
+      pathname: `/detail`,
+      search: `?id=${item.id}`
     })
   }
 
   const tableRows = TABLE_TASK.map(item => ({
     ...item,
-    id: item.name,
-    name: <span className="type-click" onClick={togglePopup(item)}>{item.name}</span>
+    raw_name: item.name,
+    name: <span className="type-click" onClick={togglePopup(item)}>{item.name}</span>,
   }));
 
   const listCard = LIST_CARD.map(item => ({
     ...item,
     title: <span className="type-click" onClick={togglePopup(item)}>{item.name}</span>,
     sub: item.status,
-    id: item.name,
   }))
   return (
     <>
@@ -69,34 +70,40 @@ const InteractionClick = () => {
         />
         <div className="table-zone">
           <div className="table-item">
+            <span className="interation-click__title">Table viewer</span>
             <CustomTable
               header={TABLE_HEADER}
               rows={tableRows}
               onRowClick={handleClickRow}
             />
           </div>
-          <SelectionItem
-            title="Selected row"
-            sub="Additional description"
-            des={(selectedRow && selectedRow.des) || ""}
-          />
+            <SelectionItem
+              title="Selected row"
+              sub="Additional description"
+              des={(selectedRow && selectedRow.des) || ""}
+              onClose={onCloseRowPanel}
+            />
         </div>
         <div className="card-zone">
           <div className="card-item">
-            {listCard.map(card => (
-              <CustomCard
-                key={card.name}
-                card={card}
-                onClickCard={handleClickCard}
-              >
-                <div className="card-item__des">{(card && card.des) || ""}</div>
-              </CustomCard>
-            ))}
+            <span className="interation-click__title">Mosaic card viewer</span>
+            <div className="card-item__list">
+              {listCard.map(card => (
+                <CustomCard
+                  key={card.id}
+                  card={card}
+                  onClickCard={handleClickCard}
+                >
+                  <div className="card-item__des">{(card && card.des) || ""}</div>
+                </CustomCard>
+              ))}
+            </div>
           </div>
           <SelectionItem
             title="Selected card"
             sub="Additional description"
             des={(selectedCard && selectedCard.des) || ""}
+            onClose={onCloseCardPanel}
           />
         </div>
       </div>
