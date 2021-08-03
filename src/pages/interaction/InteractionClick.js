@@ -49,7 +49,7 @@ const InteractionClick = () => {
 
   const tableRows = TABLE_TASK.map(item => ({
     ...item,
-    raw_name: item.name,
+    rawname: item.name,
     name: <span className="type-click" onClick={togglePopup(item)}>{item.name}</span>,
   }));
 

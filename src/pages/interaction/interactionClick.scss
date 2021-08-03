@@ -1,4 +1,6 @@
 .interation-click {
+  padding: 24px 16px;
+  background: #fff;
   &__title {
     font-weight: bold;
     display: block;
@@ -62,7 +64,7 @@
       line-height: 1.5;
     }
     &__des {
-      text-align: justify;
+      text-align: left;
       margin-top: 24px;
       font-size: 13px;
     }

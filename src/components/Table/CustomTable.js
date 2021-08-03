@@ -7,7 +7,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import classNames from 'classnames';
 import "./customTable.scss";
-import CustomTooltip from 'components/Tooltip/CustomTooltip';
+import TableTooltip from 'components/Tooltip/CustomTooltip';
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -59,8 +59,8 @@ const CustomTable = ({ rows, header, classExt, ...other }) => {
   useEffect(() => {
     const row0 = rows.length ? rows[0] : null;
     let newOrderBy = orderBy;
-    if (row0 && row0[`raw_${orderBy}`]) {
-      newOrderBy = `raw_${orderBy}`;
+    if (row0 && row0[`raw${orderBy}`]) {
+      newOrderBy = `raw${orderBy}`;
     }
     const newData = stableSort(rows, getComparator(order, newOrderBy));
     setData(newData);
@@ -100,9 +100,9 @@ const CustomTable = ({ rows, header, classExt, ...other }) => {
             {header.map(item => (
               item.trunk ? (
                 <TableCell className="table-cell--trunk" key={item.id}>
-                  <CustomTooltip title={row[item.id]} placement="bottom">
+                  <TableTooltip title={row[item.id]} placement="bottom">
                     <span>{row[item.id]}</span>
-                  </CustomTooltip>
+                  </TableTooltip>
                 </TableCell>
               ) : (
                 <TableCell key={item.id}>{row[item.id]}</TableCell>
