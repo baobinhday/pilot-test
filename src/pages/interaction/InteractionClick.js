@@ -6,10 +6,19 @@ import {
   SimpleDialog,
   CustomRadioGroup,
   CustomCard,
-  NodeClick
+  NodeInteraction,
 } from 'components';
+
 import SelectionItem from './SelectionItem';
-import { LIST_CARD, RADIO_OPTIONS, TABLE_HEADER, TABLE_TASK, CONTEXT_ROW_MENU } from './config';
+import {
+  LIST_CARD,
+  RADIO_OPTIONS,
+  TABLE_HEADER,
+  TABLE_TASK,
+  CONTEXT_ROW_MENU,
+  CONTEXT_CARD_MENU,
+  CONTEXT_TABLE
+} from './config';
 
 const InteractionClick = () => {
   const [selectedRow, setSelectedRow] = useState(null);
@@ -57,33 +66,37 @@ const InteractionClick = () => {
     ...item,
     rawname: item.name,
     name: (
-      <NodeClick
+      <NodeInteraction
         className="type-click"
-        nodeClick={togglePopup} 
+        nodeClick={togglePopup}
         nodeTag="span"
         dataClickOutput={item}
         key={item.id}
       >
         {item.name}
-      </NodeClick>
+      </NodeInteraction>
     ),
   }));
 
   const listCard = LIST_CARD.map((item) => ({
     ...item,
     title: (
-      <NodeClick
+      <NodeInteraction
         className="type-click"
-        nodeClick={togglePopup} 
+        nodeClick={togglePopup}
         nodeTag="span"
         dataClickOutput={item}
         key={`title_${item.id}`}
       >
         {item.name}
-      </NodeClick>
+      </NodeInteraction>
     ),
     sub: item.status,
   }));
+  const genCardContextMenu = (cardContextMenu, uniId) => ({
+    ...cardContextMenu,
+    id: `${uniId}-${cardContextMenu.id}`
+  });
   return (
     <>
       <div className="interation-click">
@@ -97,7 +110,11 @@ const InteractionClick = () => {
           classExt="interation-click__select-type"
         />
         <div className="table-zone">
-          <div className="table-item">
+          <NodeInteraction
+            nodeTag="div"
+            className="table-item"
+            contextMenu={CONTEXT_TABLE}
+          >
             <span className="interation-click__title">Table viewer</span>
             <CustomTable
               header={TABLE_HEADER}
@@ -105,7 +122,7 @@ const InteractionClick = () => {
               onRowClick={handleClickRow}
               contextMenu={CONTEXT_ROW_MENU}
             />
-          </div>
+          </NodeInteraction>
           <SelectionItem
             title="Selected row"
             sub="Additional description"
@@ -118,23 +135,22 @@ const InteractionClick = () => {
             <span className="interation-click__title">Mosaic card viewer</span>
             <div className="card-item__list">
               {listCard.map((card) => (
-                <NodeClick
-                  key={card.id}
-                  className="card-item__node"
-                  nodeClick={handleClickCard} 
+                <NodeInteraction
                   nodeTag="div"
+                  className="card-item__node"
+                  key={card.id}
+                  nodeClick={handleClickCard}
                   dataClickOutput={card}
-                  contextMenu={CONTEXT_ROW_MENU}
+                  dataRightClickOutput={card}
+                  contextMenu={genCardContextMenu(CONTEXT_CARD_MENU, card.id)}
+                  // customContextMenu
                 >
-                  <CustomCard
-                    key={card.id}
-                    card={card}
-                  >
+                  <CustomCard key={card.id} card={card}>
                     <div className="card-item__des">
                       {(card && card.des) || ''}
                     </div>
                   </CustomCard>
-                </NodeClick>
+                </NodeInteraction>
               ))}
             </div>
           </div>
@@ -145,10 +161,13 @@ const InteractionClick = () => {
             onClose={onCloseCardPanel}
           />
         </div>
+        {/* <CustomContextMenu {...CONTEXT_CARD_MENU} /> */}
       </div>
       <SimpleDialog
         open={!!selectedPopupItem}
-        onClose={() =>  { togglePopup(); }}
+        onClose={() => {
+          togglePopup();
+        }}
         title="Dialog"
         classExt="interation-click__dialog"
       >

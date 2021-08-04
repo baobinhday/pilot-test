@@ -1,0 +1,16 @@
+.react-context-wrapper {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  opacity: 1;
+  overflow: hidden;
+  &--hidden {
+    // width: 0;
+    // height: 0;
+    z-index: -1;
+    opacity: 0;
+  }
+}

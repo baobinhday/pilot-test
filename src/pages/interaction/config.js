@@ -98,40 +98,135 @@ export const RADIO_OPTIONS = [
   },
 ];
 
-export const CONTEXT_ROW_MENU = {
-  id: "context-row",
+export const CONTEXT_TABLE = {
+  id: 'context-table',
   list: [
     {
-      id: "rename",
-      title: "Rename"
-    }, {
-      id: "duplicate",
-      title: "Duplicate"
-    }, {
-      id: "move-to",
-      title: "Move to ..."
-    }, {
-      id: "export",
-      title: "Export",
-      subMenu: [
-        {
-          id: "png",
-          title: "PNG"
-        }, {
-          id: "jpeg",
-          title: "JPEG"
-        }
-      ]
-    }, {
-      id: "slice",
-      title: "Slice"
-    }, {
-      id: "divider",
-      title: "Divider",
-      isDivider: true
-    }, {
-      id: "delete",
-      title: "Delete this item"
+      id: 'Import',
+      title: 'Import'
+    },
+    {
+      id: 'Export',
+      title: 'Export'
     }
   ]
+}
+
+export const CONTEXT_ROW_MENU = {
+  id: 'context-row',
+  list: [
+    {
+      id: 'rename',
+      title: 'Rename',
+      onClick: (e, data) => {
+        console.log('Rename', data);
+      },
+    },
+    {
+      id: 'duplicate',
+      title: 'Duplicate',
+      onClick: (e, data) => {
+        console.log('Duplicate', data);
+      },
+    },
+    {
+      id: 'move-to',
+      title: 'Move to ...',
+      onClick: (e, data) => {
+        console.log('Move to ...', data);
+      },
+    },
+    {
+      id: 'export',
+      title: 'Export',
+      onClick: (e, data) => {
+        console.log('Export', data);
+      },
+    },
+    {
+      id: 'slice',
+      title: 'Slice',
+      onClick: (e, data) => {
+        console.log('Slice', data);
+      },
+    },
+    {
+      id: 'divider',
+      title: 'Divider',
+      isDivider: true,
+    },
+    {
+      id: 'delete',
+      title: 'Delete this item',
+      onClick: (e, data) => {
+        console.log('Delete this item', data);
+      },
+    },
+  ],
+};
+
+export const CONTEXT_CARD_MENU = {
+  id: 'context-card',
+  list: [
+    {
+      id: 'rename',
+      title: 'Rename',
+      onClick: (e, data) => {
+        console.log('Rename', data);
+      },
+    },
+    {
+      id: 'duplicate',
+      title: 'Duplicate',
+      onClick: (e, data) => {
+        console.log('Duplicate', data);
+      },
+    },
+    {
+      id: 'move-to',
+      title: 'Move to ...',
+      onClick: (e, data) => {
+        console.log('Move to', data);
+      },
+    },
+    {
+      id: 'export',
+      title: 'Export',
+      subMenu: [
+        {
+          id: 'png',
+          title: 'PNG',
+          onClick: (e, data) => {
+            console.log('Export PNG', data);
+          },
+        },
+        {
+          id: 'jpeg',
+          title: 'JPEG',
+          onClick: (e, data) => {
+            console.log('Export JPEG', data);
+          },
+        },
+      ],
+    },
+    {
+      id: 'slice',
+      title: 'Slice',
+      onClick: (e, data) => {
+        console.log('Slice', data);
+      },
+    },
+    {
+      id: 'divider',
+      title: 'Divider',
+      isDivider: true,
+    },
+    {
+      id: 'delete',
+      title: 'Delete this item',
+      onClick: (e, data) => {
+        console.log('Delete this item', data);
+      },
+    },
+  ],
 };

@@ -7,7 +7,8 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import classNames from 'classnames';
 import './customTable.scss';
-import NodeClick from 'components/NodeClick/NodeClick';
+import NodeInteraction from 'components/NodeInteraction/NodeInteraction';
+import CustomContextMenu from 'components/NodeInteraction/CustomContextMenu';
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -67,62 +68,67 @@ const CustomTable = ({ rows, header, classExt, ...other }) => {
   }, [rows, order, orderBy]);
 
   return (
-    <Table
-      className={classNames('table-container', classExt)}
-      aria-label="table"
-    >
-      <TableHead>
-        <TableRow>
-          {header.map((headCell) => (
-            <TableCell
-              key={headCell.id}
-              sortDirection={
-                orderBy === headCell.id && headCell.sortable ? order : false
-              }
+    <>
+      <Table
+        className={classNames('table-container', classExt)}
+        aria-label="table"
+      >
+        <TableHead>
+          <TableRow>
+            {header.map((headCell) => (
+              <TableCell
+                key={headCell.id}
+                sortDirection={
+                  orderBy === headCell.id && headCell.sortable ? order : false
+                }
+              >
+                {headCell.sortable ? (
+                  <TableSortLabel
+                    active={orderBy === headCell.id}
+                    direction={orderBy === headCell.id ? order : 'asc'}
+                    onClick={createSortHandler(headCell.id)}
+                  >
+                    {headCell.headerName}
+                  </TableSortLabel>
+                ) : (
+                  headCell.headerName
+                )}
+              </TableCell>
+            ))}
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {data.map((row) => (
+            <NodeInteraction
+              nodeTag="tr"
+              className="MuiTableRow-root"
+              key={`row_${row.id}`}
+              nodeClick={onRowClick}
+              dataClickOutput={row}
+              dataRightClickOutput={row}
+              contextMenu={other.contextMenu}
+              customContextMenu
             >
-              {headCell.sortable ? (
-                <TableSortLabel
-                  active={orderBy === headCell.id}
-                  direction={orderBy === headCell.id ? order : 'asc'}
-                  onClick={createSortHandler(headCell.id)}
-                >
-                  {headCell.headerName}
-                </TableSortLabel>
-              ) : (
-                headCell.headerName
+              {header.map((item) =>
+                item.trunk ? (
+                  <NodeInteraction
+                    className="MuiTableCell-root MuiTableCell-body table-cell--trunk"
+                    nodeTag="td"
+                    key={`${row.id}_cell_${item.id}`}
+                    tooltipData={row[item.id]}
+                  >
+                    <span>{row[item.id]}</span>
+                  </NodeInteraction>
+                ) : (
+                  <TableCell key={item.id}>{row[item.id]}</TableCell>
+                )
               )}
-            </TableCell>
+            </NodeInteraction>
           ))}
-        </TableRow>
-      </TableHead>
-      <TableBody>
-        {data.map((row) => (
-          <NodeClick
-            nodeTag="tr"
-            className="MuiTableRow-root"
-            key={`row_${row.id}`}
-            nodeClick={onRowClick}
-            dataClickOutput={row}
-            contextMenu={other.contextMenu}
-          >
-            {header.map((item) =>
-              item.trunk ? (
-                <NodeClick
-                  className="MuiTableCell-root MuiTableCell-body table-cell--trunk"
-                  nodeTag="td"
-                  key={`${row.id}_cell_${item.id}`}
-                  tooltipData={row[item.id]}
-                >
-                  <span>{row[item.id]}</span>
-                </NodeClick>
-              ) : (
-                <TableCell key={item.id}>{row[item.id]}</TableCell>
-              )
-            )}
-          </NodeClick>
-        ))}
-      </TableBody>
-    </Table>
+        </TableBody>
+      </Table>
+      <CustomContextMenu {...other.contextMenu} />
+    </>
   );
 };
 
@@ -131,7 +137,7 @@ CustomTable.defaultProps = {
   header: [],
   classExt: '',
   onRowClick: null,
-  contextMenu: null
+  contextMenu: null,
 };
 
 export default CustomTable;

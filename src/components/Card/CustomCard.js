@@ -41,7 +41,7 @@ const CustomCard = ({ classExt, card, children, ...other }) => {
 CustomCard.defaultProps = {
   classExt: '',
   card: null,
-  onClickCard: () => {},
+  onClickCard: null,
 };
 
 export default CustomCard;
