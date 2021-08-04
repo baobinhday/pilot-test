@@ -3,7 +3,8 @@
   overflow: hidden;
   padding: 3px 3px 0 3px;
   transition: box-shadow 0.1s ease-in-out;
-  button, &__header__title {
+  button,
+  &__header__title {
     width: 80%;
     border-radius: 0;
     transition: all 100ms ease-in-out;
@@ -23,12 +24,12 @@
     z-index: 999;
   }
   &__sub {
-    box-shadow: 0px 0px 0px rgba(0,0,0,0.2), 0px 0 6px rgba(0,0,0,0.2);
+    box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.2), 0px 0 6px rgba(0, 0, 0, 0.2);
   }
 
   &--active {
     .menu-item__header {
-      box-shadow: 0px 0px 0px rgba(0,0,0,0.2), 0px 0 6px rgba(0,0,0,0.2);
+      box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.2), 0px 0 6px rgba(0, 0, 0, 0.2);
     }
     .MuiButton-root {
       background: initial;

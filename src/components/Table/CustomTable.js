@@ -6,8 +6,8 @@ import TableSortLabel from '@material-ui/core/TableSortLabel';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import classNames from 'classnames';
-import "./customTable.scss";
-import TableTooltip from 'components/Tooltip/CustomTooltip';
+import './customTable.scss';
+import NodeClick from 'components/NodeClick/NodeClick';
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -46,15 +46,15 @@ const CustomTable = ({ rows, header, classExt, ...other }) => {
     setOrderBy(property);
   };
 
-  const onRowClick = (item) => (e) => {
-    if (e) {
+  const onRowClick = (e, data) => {
+    if (e && other.onRowClick) {
       e.preventDefault();
       e.stopPropagation();
     }
     if (other.onRowClick) {
-      other.onRowClick(item);
+      other.onRowClick(data);
     }
-  }
+  };
 
   useEffect(() => {
     const row0 = rows.length ? rows[0] : null;
@@ -64,21 +64,21 @@ const CustomTable = ({ rows, header, classExt, ...other }) => {
     }
     const newData = stableSort(rows, getComparator(order, newOrderBy));
     setData(newData);
-  }, [rows, order, orderBy])
-
-  // useEffect(() => {
-  //   const listHeaderSort = header.filter(item => item.sortable);
-  //   setOrderBy(listHeaderSort && listHeaderSort.length ? listHeaderSort[0].id : "");
-  // }, [header])
+  }, [rows, order, orderBy]);
 
   return (
-    <Table className={classNames("table-container", classExt)} aria-label="table">
+    <Table
+      className={classNames('table-container', classExt)}
+      aria-label="table"
+    >
       <TableHead>
         <TableRow>
-          {header.map(headCell => (
+          {header.map((headCell) => (
             <TableCell
               key={headCell.id}
-              sortDirection={(orderBy === headCell.id && headCell.sortable) ? order : false}
+              sortDirection={
+                orderBy === headCell.id && headCell.sortable ? order : false
+              }
             >
               {headCell.sortable ? (
                 <TableSortLabel
@@ -88,38 +88,50 @@ const CustomTable = ({ rows, header, classExt, ...other }) => {
                 >
                   {headCell.headerName}
                 </TableSortLabel>
-              )
-              : headCell.headerName}
+              ) : (
+                headCell.headerName
+              )}
             </TableCell>
           ))}
         </TableRow>
       </TableHead>
       <TableBody>
         {data.map((row) => (
-          <TableRow key={row.id} onClick={onRowClick(row)}>
-            {header.map(item => (
+          <NodeClick
+            nodeTag="tr"
+            className="MuiTableRow-root"
+            key={`row_${row.id}`}
+            nodeClick={onRowClick}
+            dataClickOutput={row}
+            contextMenu={other.contextMenu}
+          >
+            {header.map((item) =>
               item.trunk ? (
-                <TableCell className="table-cell--trunk" key={item.id}>
-                  <TableTooltip title={row[item.id]} placement="bottom">
-                    <span>{row[item.id]}</span>
-                  </TableTooltip>
-                </TableCell>
+                <NodeClick
+                  className="MuiTableCell-root MuiTableCell-body table-cell--trunk"
+                  nodeTag="td"
+                  key={`${row.id}_cell_${item.id}`}
+                  tooltipData={row[item.id]}
+                >
+                  <span>{row[item.id]}</span>
+                </NodeClick>
               ) : (
                 <TableCell key={item.id}>{row[item.id]}</TableCell>
               )
-            ))}
-          </TableRow>
+            )}
+          </NodeClick>
         ))}
       </TableBody>
     </Table>
-  )
+  );
 };
 
 CustomTable.defaultProps = {
   rows: [],
   header: [],
-  classExt: "",
-  onRowClick: null
-}
+  classExt: '',
+  onRowClick: null,
+  contextMenu: null
+};
 
 export default CustomTable;

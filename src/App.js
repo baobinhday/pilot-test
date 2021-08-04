@@ -1,17 +1,12 @@
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 
-import "react-grid-layout/css/styles.css";
-import "react-resizable/css/styles.css";
+import 'react-grid-layout/css/styles.css';
+import 'react-resizable/css/styles.css';
 import logo from './logo.svg';
 import './App.css';
-import GNB from "./components/GNB/GNB";
-import InteractionClick from "./pages/interaction/InteractionClick";
-import InteractionDetail from "./pages/interaction/InteractionDetail";
+import GNB from './components/GNB/GNB';
+import InteractionClick from './pages/interaction/InteractionClick';
+import InteractionDetail from './pages/interaction/InteractionDetail';
 
 function App() {
   return (

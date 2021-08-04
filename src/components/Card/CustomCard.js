@@ -4,21 +4,25 @@ import CardContent from '@material-ui/core/CardContent';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import IconButton from '@material-ui/core/IconButton';
 import classNames from 'classnames';
-import "./customCard.scss";
+import './customCard.scss';
 
 const CustomCard = ({ classExt, card, children, ...other }) => {
   const onClickCard = (e) => {
-    if (e) {
+    if (e && other.onClickCard) {
       e.preventDefault();
       e.stopPropagation();
     }
     if (other.onClickCard) {
-      other.onClickCard(card)
+      other.onClickCard(card);
     }
-  }
+  };
   if (!card) return <div />;
   return (
-    <Card onClick={onClickCard} className={classNames("custom-card", classExt)} variant="outlined">
+    <Card
+      onClick={onClickCard}
+      className={classNames('custom-card', classExt)}
+      variant="outlined"
+    >
       <CardHeader
         avatar={card.avatar}
         action={
@@ -29,17 +33,15 @@ const CustomCard = ({ classExt, card, children, ...other }) => {
         title={card.title}
         subheader={card.sub}
       />
-      <CardContent>
-        {children}
-      </CardContent>
+      <CardContent>{children}</CardContent>
     </Card>
   );
 };
 
 CustomCard.defaultProps = {
-  classExt: "",
+  classExt: '',
   card: null,
-  onClickCard: () => {}
+  onClickCard: () => {},
 };
 
 export default CustomCard;

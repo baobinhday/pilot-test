@@ -1,0 +1,5 @@
+{
+  "prettier.singleQuote": true,
+  "prettier.configPath": ".prettierrc.json",
+  "editor.defaultFormatter": "esbenp.prettier-vscode"
+}

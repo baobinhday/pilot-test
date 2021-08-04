@@ -1,12 +1,22 @@
-import classNames from "classnames";
+import classNames from 'classnames';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import CloseIcon from '@material-ui/icons/Close';
 import IconButton from '@material-ui/core/IconButton';
 
 const SelectionItem = ({ title, sub, des, classExt, onClose }) => (
-  <div className={classNames("selected-item", classExt, des ? "selected-item--show" : "selected-item--hidden")}>
+  <div
+    className={classNames(
+      'selected-item',
+      classExt,
+      des ? 'selected-item--show' : 'selected-item--hidden'
+    )}
+  >
     <div className="selected-item__header">
-      <IconButton onClick={onClose} className="selected-item__close" aria-label="close">
+      <IconButton
+        onClick={onClose}
+        className="selected-item__close"
+        aria-label="close"
+      >
         <CloseIcon fontSize="small" />
       </IconButton>
     </div>
@@ -22,10 +32,10 @@ const SelectionItem = ({ title, sub, des, classExt, onClose }) => (
 );
 
 SelectionItem.defaultProps = {
-  title: "",
-  sub: "",
-  des: "",
-  classExt: "",
-  onClose: () => {}
+  title: '',
+  sub: '',
+  des: '',
+  classExt: '',
+  onClose: () => {},
 };
 export default SelectionItem;
