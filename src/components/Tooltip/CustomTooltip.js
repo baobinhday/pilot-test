@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Tooltip from '@material-ui/core/Tooltip';
 import './customTooltip.scss';
 
-const CustomTooltip = ({ children, ...other }) => {
+const CustomTooltip = ({ children, title, tooltipComponent, ...other }) => {
   const [position, setPosition] = useState({ x: undefined, y: undefined });
   return (
     <Tooltip
@@ -22,6 +22,7 @@ const CustomTooltip = ({ children, ...other }) => {
           }),
         },
       }}
+      title={tooltipComponent || title}
     >
       {children}
     </Tooltip>
