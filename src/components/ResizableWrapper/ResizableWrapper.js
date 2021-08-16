@@ -1,9 +1,9 @@
-import React, { useRef } from "react";
-import { useRefresh } from "muuri-react";
-import { ResizableBox } from "react-resizable";
-import { debounce } from "underscore";
+import React, { useRef } from 'react';
+import { useRefresh } from 'muuri-react';
+import { ResizableBox } from 'react-resizable';
+import { debounce } from 'underscore';
 
-const ResizableWrapper = ({ width, height, handleIcon, children }) => {
+const ResizableWrapper = ({ width, height, handleIcon, children, ...others }) => {
 
   const ref = useRef();
   const refresh = useRefresh();
@@ -14,8 +14,8 @@ const ResizableWrapper = ({ width, height, handleIcon, children }) => {
   );
 
   const onResize = (e, { size }) => {
-    ref.current.style.width = size.width + "px";
-    ref.current.style.height = size.height + "px";
+    ref.current.style.width = size.width + 'px';
+    ref.current.style.height = size.height + 'px';
 
     refreshWithdebounce();
   }
@@ -23,23 +23,30 @@ const ResizableWrapper = ({ width, height, handleIcon, children }) => {
   return (
     <div
       ref={ref}
-      className="resize-wrapper"
+      className='resize-wrapper'
       style={{ width: `${width}px`, height: `${height}px` }}
     >
-      <div className="resize-wrapper__box">
+      <div className='resize-wrapper__box'>
         <ResizableBox
           width={width}
           height={height}
-          minConstraints={[width, height]}
           onResize={onResize}
           handle={handleIcon}
-          draggableOpts={{grid: [50, 50]}}
+          { ...others }
         >
           {children}
         </ResizableBox>
       </div>
     </div>
   );
+};
+
+ResizableWrapper.defaultProps = {
+  draggableOpts: { grid: [100, 100] },
+  minConstraints: [50, 50],
+  maxConstraints: [1000, 1000],
+  width: '100',
+  height: '100'
 };
 
 // const ResizableWrapper = (Component, { width, height, handleIcon }) => {
@@ -55,8 +62,8 @@ const ResizableWrapper = ({ width, height, handleIcon, children }) => {
 //     );
 
 //     const onResize = (e, { size }) => {
-//       ref.current.style.width = size.width + "px";
-//       ref.current.style.height = size.height + "px";
+//       ref.current.style.width = size.width + 'px';
+//       ref.current.style.height = size.height + 'px';
 
 //       refreshWithdebounce();
 //     }
@@ -65,10 +72,10 @@ const ResizableWrapper = ({ width, height, handleIcon, children }) => {
 //     return (
 //       <div
 //         ref={ref}
-//         className="resize-wrapper"
+//         className='resize-wrapper'
 //         style={{ width: `${width}px`, height: `${height}px` }}
 //       >
-//         <div className="resize-wrapper__box">
+//         <div className='resize-wrapper__box'>
 //           <ResizableBox
 //             width={width}
 //             height={height}

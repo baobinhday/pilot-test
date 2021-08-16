@@ -7,19 +7,17 @@ const ResizeDashboard = ({
   classExt,
   customOptions,
   classHandle
-}) => {
-  return (
-    <div className={`resize-dashboard-wrapper ${classExt}`}>
-      <MuuriComponent
-        {...options}
-        {...customOptions}
-        dragStartPredicate={{ handle: `.${classHandle}` }}
-      >
-        {children}
-      </MuuriComponent>
-    </div>
-  );
-};
+}) => (
+  <div className={`resize-dashboard-wrapper ${classExt}`}>
+    <MuuriComponent
+      {...options}
+      {...customOptions}
+      dragStartPredicate={{ handle: `.${classHandle}` }}
+    >
+      {children}
+    </MuuriComponent>
+  </div>
+);
 
 ResizeDashboard.defaultsProps = {
   classExt: '',

@@ -1,9 +1,10 @@
 import React from 'react';
-import { ResizeDashboard, DashboardItem } from 'components';
+import { ResizeDashboard, DashboardItem, ResizableWrapper } from 'components';
 import './dashboard.scss';
 import { LIST_CARD_1, LIST_CARD_2 } from './mockData';
 
 const Dashboard1 = () => {
+  const classMove0 = 'resize-item-wrapper-0';
   const classMove1 = 'resize-item-wrapper-1';
   const classMove2 = 'resize-item-wrapper-2';
   const listItemComponent = LIST_CARD_1.map((item) => (
@@ -19,18 +20,79 @@ const Dashboard1 = () => {
   ));
 
   return (
-    <div className='dashboard-1'>
+    <div className="dashboard-1">
       <ResizeDashboard
         listData={LIST_CARD_1}
-        classExt='dasboard-1-1'
-        classHandle='resize-item-wrapper-1'
+        classExt="dasboard-1-0"
+        classHandle={classMove0}
+      >
+        <ResizableWrapper
+          width={200}
+          height={200}
+          draggableOpts={{ grid: [100, 100] }}
+        >
+          <DashboardItem
+            key={1}
+            id={1}
+            classHandle={classMove0}
+          >
+            <Item title={1} />
+          </DashboardItem>
+        </ResizableWrapper>
+        <ResizableWrapper
+          width={200}
+          height={200}
+          draggableOpts={{ grid: [100, 100] }}
+        >
+          <DashboardItem
+            key={2}
+            id={2}
+            classHandle={classMove0}
+          >
+            <Item title={2} />
+          </DashboardItem>
+        </ResizableWrapper>
+        <ResizableWrapper
+          width={200}
+          height={200}
+          draggableOpts={{ grid: [100, 100] }}
+        >
+          <DashboardItem
+            key={3}
+            id={3}
+            classHandle={classMove0}
+          >
+            <Item title={3} />
+          </DashboardItem>
+        </ResizableWrapper>
+        <ResizableWrapper
+          width={200}
+          height={200}
+          draggableOpts={{ grid: [100, 100] }}
+        >
+          <DashboardItem
+            key={4}
+            id={4}
+            classHandle={classMove0}
+            draggableOpts={{ grid: [100, 100] }}
+          >
+            <Item title={4} />
+          </DashboardItem>
+        </ResizableWrapper>
+      </ResizeDashboard>
+
+      <ResizeDashboard
+        listData={LIST_CARD_1}
+        classExt="dasboard-1-1"
+        classHandle={classMove1}
       >
         {listItemComponent}
       </ResizeDashboard>
+
       <ResizeDashboard
         listData={LIST_CARD_2}
         listItemComponent={listItemComponent}
-        classExt='dashboard-1-2'
+        classExt="dashboard-1-2"
         classHandle={classMove2}
       >
         <DashboardItem
@@ -104,7 +166,7 @@ const Dashboard1 = () => {
 export default Dashboard1;
 
 const Item = ({ title }) => (
-  <div className='card-order'>
-    <div className='card-order__title'>{title}</div>
+  <div className="card-order">
+    <div className="card-order__title">{title}</div>
   </div>
 );
