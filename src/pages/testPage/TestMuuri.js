@@ -1,6 +1,8 @@
 /* React */
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ReactDom from "react-dom";
+
+import { makeStyles } from '@material-ui/core/styles';
 /* Muuri-react */
 import { MuuriComponent } from "muuri-react";
 /* Utils & components */
@@ -10,21 +12,41 @@ import { Footer, Button, Demo } from "./components";
 import "./style.scss";
 import { ResizableWrapper } from "components";
 
+const useStyles = makeStyles(() => ({
+  cardItem: props => ({
+    width: props.width,
+    height: props.height
+  })
+}));
+
 // App.
 const App = () => {
   // Items state.
   const [nextWidth, setNextWidth] = useState(1);
   const [items, setItems] = useState(generateItems(1, nextWidth));
-
   const listItemComponent = items.map(({ id, color, title, width, height }) => (
-    <ResizeItemTest
+    <ResizableWrapper
       key={id}
-      color={color}
-      title={title}
-      width={width}
+      id={id}
       height={height}
-    />
+      width={width}
+    >
+      <Item
+        color={color}
+        title={title}
+      />
+    </ResizableWrapper>
   ));
+  // const listItemComponent = items.map(({ id, color, title, width, height }) => (
+  //   <ResizeItemTest
+  //     key={id}
+  //     id={id}
+  //     color={color}
+  //     title={title}
+  //     width={width}
+  //     height={height}
+  //   />
+  // ));
 
   return (
     <Demo>
@@ -45,7 +67,7 @@ const Dashboard = ({ listItemComponent }) => {
   return (
     <MuuriComponent
       {...options}
-      dragStartPredicate={{ handle: ".card-wrapper" }}
+      dragStartPredicate={{ handle: ".card" }}
     >
       {listItemComponent}
     </MuuriComponent>
@@ -57,34 +79,14 @@ Dashboard.defaultsProps = {
   listItemComponent: []
 };
 
-const ResizeItemTest = ResizableWrapper(
-  ({ color, title, remove }) => {
-    return (
-      <Item
-        color={color}
-        title={title}
-        remove={remove}
-      />
-    )
-  },
-  {
-    width: 200,
-    height: 200
-  }
-);
-// const ResizeItem = ResizableWrapper(
+// const ResizeItemTest = ResizableWrapper(
 //   ({ color, title, remove }) => {
 //     return (
-//       <div className="card-wrapper">
-//         <div className={`card ${color}`}>
-//           <div className="card-title">{title}</div>
-//           <div className="card-remove">
-//             <i className="material-icons" onMouseDown={remove}>
-//               &#xE5CD;
-//             </i>
-//           </div>
-//         </div>
-//       </div>
+//       <Item
+//         color={color}
+//         title={title}
+//         remove={remove}
+//       />
 //     )
 //   },
 //   {
@@ -105,5 +107,27 @@ const Item = ({ color, title, remove }) => (
     </div>
   </div>
 )
+
+const ItemGrid = ({ id, color, title, remove, width, height }) => {
+  const classes = useStyles({ width, height });
+
+  useEffect(() => {
+    window.$(`#card-id-${id}`).resizable({
+      grid: 50
+    });
+  }, []);
+  return (
+    <div className={`card-wrapper ${classes.cardItem}`} id={`card-id-${id}`}>
+      <div className={`card ${color}`} >
+        <div className="card-title">{title}</div>
+        {/* <div className="card-remove">
+          <i className="material-icons" onMouseDown={remove}>
+            &#xE5CD;
+          </i>
+        </div> */}
+      </div>
+    </div>
+  );
+};
 
 export default App;

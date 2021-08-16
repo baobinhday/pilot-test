@@ -27,7 +27,7 @@ export const generateItems = (num, nextWidth) => {
   for (let i = 0; i < 1; i++) {
     const color = oneOf(["red", "green", "blue"]);
     const width = nextWidth * 100;
-    const height = 1 * 200;
+    const height = 100;
 
     //const title = oneOf(alphabet) + oneOf(alphabet);
     const title = num || 1;

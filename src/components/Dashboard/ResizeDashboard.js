@@ -1,26 +1,19 @@
 import React from 'react';
 import { MuuriComponent } from 'muuri-react';
-import './/resizeDashboard.scss';
+import './resizeDashboard.scss';
 
-const ResizeDashboard = ({ listData, listItemComponent, classExt, customOptions }) => {
-  const children = listData.map(({ id, width, height }, index) => (
-    <div
-      key={id}
-      style={{
-        width,
-        height
-      }}
-      className="resize-item-wrapper"
-    >
-      {listItemComponent[index]}
-    </div>
-  ));
+const ResizeDashboard = ({
+  children,
+  classExt,
+  customOptions,
+  classHandle
+}) => {
   return (
     <div className={`resize-dashboard-wrapper ${classExt}`}>
       <MuuriComponent
-        { ...options }
-        { ...customOptions }
-        dragStartPredicate={{ handle: ".resize-item-wrapper" }}
+        {...options}
+        {...customOptions}
+        dragStartPredicate={{ handle: `.${classHandle}` }}
       >
         {children}
       </MuuriComponent>
@@ -29,10 +22,9 @@ const ResizeDashboard = ({ listData, listItemComponent, classExt, customOptions 
 };
 
 ResizeDashboard.defaultsProps = {
-  classExt: "",
-  listData: [],
-  listItemComponent: [],
-  customOptions: {}
+  classExt: '',
+  customOptions: {},
+  classHandle: 'resize-item-wrapper'
 };
 
 export default ResizeDashboard;
@@ -47,25 +39,25 @@ const options = {
   dragSortPredicate: {
     threshold: 40,
     action: 'move',
-    migrateAction: 'move'
+    migrateAction: 'move',
   },
   dragRelease: {
     duration: 200,
-    easing: "ease-out"
+    easing: 'ease-out',
   },
   dragEnabled: true,
   dragContainer: document.body,
   // The placeholder of an item that is being dragged.
   dragPlaceholder: {
     enabled: true,
-    createElement: function(item) {
-      // The element will have the Css class ".muuri-item-placeholder".
+    createElement: function (item) {
+      // The element will have the Css class '.muuri-item-placeholder'.
       return item.getElement().cloneNode(true);
-    }
+    },
   },
   layout: {
     fillGaps: true,
-    height: 1000
+    height: 1000,
     // horizontal: true,
   },
   layoutOnResize: true,
