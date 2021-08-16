@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import Tooltip from '@material-ui/core/Tooltip';
 import './customTooltip.scss';
 
@@ -28,5 +28,10 @@ const CustomTooltip = ({ children, title, tooltipComponent, ...other }) => {
     </Tooltip>
   );
 };
+
+CustomTooltip.defaultProps = {
+  tooltipComponent: null,
+  title: ""
+}
 
 export default CustomTooltip;

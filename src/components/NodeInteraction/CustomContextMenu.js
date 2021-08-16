@@ -1,3 +1,4 @@
+import React from 'react';
 import { MenuItem, SubMenu } from 'react-contextmenu';
 import ReactContextMenu from './ReactContextMenu';
 

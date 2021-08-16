@@ -1,3 +1,4 @@
+import React from 'react';
 import Avatar from '@material-ui/core/Avatar';
 
 export const LIST_CARD = [

@@ -58,7 +58,7 @@ const NodeInteraction = ({
     return (
       <C onClick={handleClick} {...other}>
         {tooltipData ? (
-          <CustomTooltip tooltipComponent={<div>1</div>} title={tooltipData}>{children}</CustomTooltip>
+          <CustomTooltip>{children}</CustomTooltip>
         ) : (
           children
         )}
