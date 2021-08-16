@@ -2,6 +2,7 @@ import React, { useRef } from 'react';
 import { useRefresh } from 'muuri-react';
 import { ResizableBox } from 'react-resizable';
 import { debounce } from 'underscore';
+import "./resizableWrapper.scss";
 
 const ResizableWrapper = ({ width, height, handleIcon, children, ...others }) => {
 
@@ -10,7 +11,7 @@ const ResizableWrapper = ({ width, height, handleIcon, children, ...others }) =>
 
   const refreshWithdebounce = debounce(
     () => requestAnimationFrame(refresh),
-    50
+    20
   );
 
   const onResize = (e, { size }) => {
@@ -32,6 +33,7 @@ const ResizableWrapper = ({ width, height, handleIcon, children, ...others }) =>
           height={height}
           onResize={onResize}
           handle={handleIcon}
+          resizeHandles={['sw', 'se', 'nw', 'ne', 'w', 'e', 'n', 's']}
           { ...others }
         >
           {children}
@@ -42,11 +44,12 @@ const ResizableWrapper = ({ width, height, handleIcon, children, ...others }) =>
 };
 
 ResizableWrapper.defaultProps = {
-  draggableOpts: { grid: [100, 100] },
+  draggableOpts: { grid: [10, 10] },
   minConstraints: [50, 50],
   maxConstraints: [1000, 1000],
   width: '100',
-  height: '100'
+  height: '100',
+  resizeHandles: ['sw', 'se', 'nw', 'ne', 'w', 'e', 'n', 's']
 };
 
 // const ResizableWrapper = (Component, { width, height, handleIcon }) => {

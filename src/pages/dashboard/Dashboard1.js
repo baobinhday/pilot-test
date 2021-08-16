@@ -1,7 +1,7 @@
 import React from 'react';
 import { ResizeDashboard, DashboardItem, ResizableWrapper } from 'components';
 import './dashboard.scss';
-import { LIST_CARD_1, LIST_CARD_2 } from './mockData';
+import { LIST_CARD_1, LIST_CARD_2, RESIZE_OPTIONS } from './mockData';
 
 const Dashboard1 = () => {
   const classMove0 = 'resize-item-wrapper-0';
@@ -29,7 +29,7 @@ const Dashboard1 = () => {
         <ResizableWrapper
           width={200}
           height={200}
-          draggableOpts={{ grid: [100, 100] }}
+          { ...RESIZE_OPTIONS }
         >
           <DashboardItem
             key={1}
@@ -42,7 +42,7 @@ const Dashboard1 = () => {
         <ResizableWrapper
           width={200}
           height={200}
-          draggableOpts={{ grid: [100, 100] }}
+          { ...RESIZE_OPTIONS }
         >
           <DashboardItem
             key={2}
@@ -55,7 +55,7 @@ const Dashboard1 = () => {
         <ResizableWrapper
           width={200}
           height={200}
-          draggableOpts={{ grid: [100, 100] }}
+          { ...RESIZE_OPTIONS }
         >
           <DashboardItem
             key={3}
@@ -68,13 +68,12 @@ const Dashboard1 = () => {
         <ResizableWrapper
           width={200}
           height={200}
-          draggableOpts={{ grid: [100, 100] }}
+          { ...RESIZE_OPTIONS }
         >
           <DashboardItem
             key={4}
             id={4}
             classHandle={classMove0}
-            draggableOpts={{ grid: [100, 100] }}
           >
             <Item title={4} />
           </DashboardItem>
