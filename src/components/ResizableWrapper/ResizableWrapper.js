@@ -33,7 +33,6 @@ const ResizableWrapper = ({ width, height, handleIcon, children, ...others }) =>
           height={height}
           onResize={onResize}
           handle={handleIcon}
-          resizeHandles={['sw', 'se', 'nw', 'ne', 'w', 'e', 'n', 's']}
           { ...others }
         >
           {children}

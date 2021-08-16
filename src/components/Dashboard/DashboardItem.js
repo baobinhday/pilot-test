@@ -1,6 +1,6 @@
 import React from 'react';
 
-const DashboardItem = ({ id, width, height, classExt, classHandle, children}) => (
+const DashboardItem = ({ width, height, classExt, classHandle, children}) => (
   <div
     style={{
       width,
@@ -13,8 +13,8 @@ const DashboardItem = ({ id, width, height, classExt, classHandle, children}) =>
 );
 
 DashboardItem.defaultProps = {
-  classExt: "",
-  classHandle: "",
+  classExt: '',
+  classHandle: '',
   width: '100%',
   height: '100%'
 };

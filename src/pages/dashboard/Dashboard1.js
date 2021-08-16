@@ -20,10 +20,10 @@ const Dashboard1 = () => {
   ));
 
   return (
-    <div className="dashboard-1">
+    <div className='dashboard-1'>
       <ResizeDashboard
         listData={LIST_CARD_1}
-        classExt="dasboard-1-0"
+        classExt='dashboard-1-0'
         classHandle={classMove0}
       >
         <ResizableWrapper
@@ -82,7 +82,7 @@ const Dashboard1 = () => {
 
       <ResizeDashboard
         listData={LIST_CARD_1}
-        classExt="dasboard-1-1"
+        classExt='dasboard-1-1'
         classHandle={classMove1}
       >
         {listItemComponent}
@@ -91,7 +91,7 @@ const Dashboard1 = () => {
       <ResizeDashboard
         listData={LIST_CARD_2}
         listItemComponent={listItemComponent}
-        classExt="dashboard-1-2"
+        classExt='dashboard-1-2'
         classHandle={classMove2}
       >
         <DashboardItem
@@ -165,7 +165,7 @@ const Dashboard1 = () => {
 export default Dashboard1;
 
 const Item = ({ title }) => (
-  <div className="card-order">
-    <div className="card-order__title">{title}</div>
+  <div className='card-order'>
+    <div className='card-order__title'>{title}</div>
   </div>
 );
