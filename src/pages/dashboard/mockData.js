@@ -103,6 +103,5 @@ export const LIST_CARD_2 = [
 export const RESIZE_GAP = { grid: [100, 100] };
 
 export const RESIZE_OPTIONS = {
-  draggableOpts: { grid: [100, 100] },
   resizeHandles: ['se']
 }

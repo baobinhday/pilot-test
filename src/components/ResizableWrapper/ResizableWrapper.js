@@ -1,97 +1,102 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { useRefresh } from 'muuri-react';
 import { ResizableBox } from 'react-resizable';
 import { debounce } from 'underscore';
-import "./resizableWrapper.scss";
+import './resizableWrapper.scss';
 
-const ResizableWrapper = ({ width, height, handleIcon, children, ...others }) => {
+const ResizableWrapper = ({ width, height, handleIcon, classWrapper, gap, children, ...others }) => {
 
   const ref = useRef();
+  const resizeRef = useRef();
   const refresh = useRefresh();
 
-  const refreshWithdebounce = debounce(
+  const [initSize, setInitSize] = useState({
+    width, height
+  });
+  const [, setResizing] = useState(false);
+
+  const refreshWithDebounce = debounce(
     () => requestAnimationFrame(refresh),
     20
   );
 
-  const onResize = (e, { size }) => {
-    ref.current.style.width = size.width + 'px';
-    ref.current.style.height = size.height + 'px';
+  const calculatorSize = (size) => {
+    let newWidth = size.width === initSize.width ? initSize.width : Math.floor((size.width + gap[0]) / gap[0]) * gap[0];
+    let newHeight = size.height === initSize.height ? initSize.height : Math.floor((size.height + gap[1]) / gap[1]) * gap[1];
+    newWidth = newWidth < others.minConstraints[0] ? others.minConstraints[0] : newWidth;
+    newHeight = newHeight < others.minConstraints[1] ? others.minConstraints[1] : newHeight;
+    return {
+      width: newWidth,
+      height: newHeight
+    };
+  };
 
-    refreshWithdebounce();
-  }
+  const onResize = (e, { size }) => {
+    refreshWithDebounce();
+    if (ref.current) {
+      const newSize = calculatorSize(size);
+      ref.current.style.width = newSize.width + 'px';
+      ref.current.style.height = newSize.height + 'px';
+    }
+  };
+
+  const onResizeStop = (e, { size }) => {
+    if (ref.current && resizeRef.current) {
+      const newSize = calculatorSize(size);
+      setInitSize({
+        width: newSize.width,
+        height: newSize.height
+      });
+      if (resizeRef.current.state.width < newSize.width) {
+        resizeRef.current.state.width = newSize.width;
+      }
+      if (resizeRef.current.state.height < newSize.height) {
+        resizeRef.current.state.height = newSize.height;
+      }
+      setResizing(false);
+    }
+  };
+
+  const onResizeStart = (e, { size }) => {
+    setResizing(true);
+  };
+
 
   return (
     <div
       ref={ref}
-      className='resize-wrapper'
-      style={{ width: `${width}px`, height: `${height}px` }}
+      className={`resize-wrapper ${classWrapper}`}
+      style={{ width, height }}
     >
       <div className='resize-wrapper__box'>
         <ResizableBox
-          width={width}
-          height={height}
+          ref={resizeRef}
+          width={initSize.width}
+          height={initSize.height}
           onResize={onResize}
           handle={handleIcon}
+          onResizeStop={onResizeStop}
+          onResizeStart={onResizeStart}
           { ...others }
         >
-          {children}
+            <div className='react-resizable__item'>
+              {children}
+            </div>
         </ResizableBox>
       </div>
+      <div className='react-resizable__placehover'><div className='react-resizable__placehover__item' /></div>
     </div>
   );
 };
 
 ResizableWrapper.defaultProps = {
-  draggableOpts: { grid: [10, 10] },
   minConstraints: [50, 50],
   maxConstraints: [1000, 1000],
   width: '100',
   height: '100',
-  resizeHandles: ['sw', 'se', 'nw', 'ne', 'w', 'e', 'n', 's']
+  resizeHandles: ['sw', 'se', 'nw', 'ne', 'w', 'e', 'n', 's'],
+  classWrapper: '',
+  gap: [100, 100]
 };
-
-// const ResizableWrapper = (Component, { width, height, handleIcon }) => {
-
-//   return function WrappedComponent(props) {
-
-//     const ref = useRef();
-//     const refresh = useRefresh();
-
-//     const refreshWithdebounce = debounce(
-//       () => requestAnimationFrame(refresh),
-//       50
-//     );
-
-//     const onResize = (e, { size }) => {
-//       ref.current.style.width = size.width + 'px';
-//       ref.current.style.height = size.height + 'px';
-
-//       refreshWithdebounce();
-//     }
-
-  
-//     return (
-//       <div
-//         ref={ref}
-//         className='resize-wrapper'
-//         style={{ width: `${width}px`, height: `${height}px` }}
-//       >
-//         <div className='resize-wrapper__box'>
-//           <ResizableBox
-//             width={width}
-//             height={height}
-//             minConstraints={[width, height]}
-//             onResize={onResize}
-//             handle={handleIcon}
-//             draggableOpts={{grid: [50, 50]}}
-//           >
-//             <Component {...props} />
-//           </ResizableBox>
-//         </div>
-//       </div>
-//     );
-//   };
-// };
 
 export default ResizableWrapper;

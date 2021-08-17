@@ -96,7 +96,7 @@ const GNB = ({ listMenu, classExt }) => {
 
   return (
     <div className={classNames('gnb-wrapper', classExt)}>
-      <div className="gnb__logo">Logo</div>
+      <div className='gnb__logo'>Logo</div>
       <div
         className={classNames(
           'gnb__menu',
@@ -114,10 +114,10 @@ const GNB = ({ listMenu, classExt }) => {
           />
         ))}
       </div>
-      <div className="gnb__mega">
+      <div className='gnb__mega'>
         <Button onClick={onClickMegaMenu}>Mega menu</Button>
       </div>
-      <div className="gnb__info">User Info</div>
+      <div className='gnb__info'>User Info</div>
     </div>
   );
 };

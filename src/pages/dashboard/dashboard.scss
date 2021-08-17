@@ -23,6 +23,21 @@
   z-index: 2;
   opacity: 0.5;
 }
-// &.muuri-item-dragging {
-//   cursor: move;
-// }
+.muuri-item-dragging {
+  .card-order {
+    background: rgb(247, 200, 162);
+  }
+}
+
+.resize-wrapper {
+  .react-resizable__placehover {
+    padding: 5px;
+  }
+  // .resize-wrapper__box--resizing {
+  //   .react-resizable__item {
+  //     .card-order {
+  //       background: rgb(247, 200, 162);
+  //     }
+  //   }
+  // }
+}

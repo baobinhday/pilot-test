@@ -1,16 +1,16 @@
 /* React */
-import React, { useEffect, useState } from "react";
-import ReactDom from "react-dom";
+import React, { useEffect, useState } from 'react';
+import ReactDom from 'react-dom';
 
 import { makeStyles } from '@material-ui/core/styles';
 /* Muuri-react */
-import { MuuriComponent } from "muuri-react";
+import { MuuriComponent } from 'muuri-react';
 /* Utils & components */
-import { useFilter, generateItems, options } from "./utils";
-import { Footer, Button, Demo } from "./components";
+import { useFilter, generateItems, options } from './utils';
+import { Footer, Button, Demo } from './components';
 /* Style */
-import "./style.scss";
-import { ResizableWrapper } from "components";
+import './style.scss';
+import { ResizableWrapper } from 'components';
 
 const useStyles = makeStyles(() => ({
   cardItem: props => ({
@@ -55,7 +55,7 @@ const App = () => {
         listItemComponent={listItemComponent}
       />
       <Footer>
-        <input type="number" value={nextWidth} onChange={e => setNextWidth(e.target.value)} />
+        <input type='number' value={nextWidth} onChange={e => setNextWidth(e.target.value)} />
         <Button onClick={() => setItems(items.concat(generateItems(items.length + 1, nextWidth)))} />
       </Footer>
     </Demo>
@@ -67,7 +67,7 @@ const Dashboard = ({ listItemComponent }) => {
   return (
     <MuuriComponent
       {...options}
-      dragStartPredicate={{ handle: ".card" }}
+      dragStartPredicate={{ handle: '.card' }}
     >
       {listItemComponent}
     </MuuriComponent>
@@ -96,11 +96,11 @@ Dashboard.defaultsProps = {
 // );
 
 const Item = ({ color, title, remove }) => (
-  <div className="card-wrapper">
+  <div className='card-wrapper'>
     <div className={`card ${color}`}>
-      <div className="card-title">{title}</div>
-      <div className="card-remove">
-        <i className="material-icons" onMouseDown={remove}>
+      <div className='card-title'>{title}</div>
+      <div className='card-remove'>
+        <i className='material-icons' onMouseDown={remove}>
           &#xE5CD;
         </i>
       </div>
@@ -119,9 +119,9 @@ const ItemGrid = ({ id, color, title, remove, width, height }) => {
   return (
     <div className={`card-wrapper ${classes.cardItem}`} id={`card-id-${id}`}>
       <div className={`card ${color}`} >
-        <div className="card-title">{title}</div>
-        {/* <div className="card-remove">
-          <i className="material-icons" onMouseDown={remove}>
+        <div className='card-title'>{title}</div>
+        {/* <div className='card-remove'>
+          <i className='material-icons' onMouseDown={remove}>
             &#xE5CD;
           </i>
         </div> */}

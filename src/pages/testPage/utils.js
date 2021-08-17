@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { useCallback } from 'react';
 
 // Return the filter method.
 export function useFilter(value, search) {
@@ -7,7 +7,7 @@ export function useFilter(value, search) {
       var isSearchMatch = !search
         ? true
         : data.title.toLowerCase().indexOf(search) > -1;
-      var isFilterMatch = value === "all" ? true : data.color === value;
+      var isFilterMatch = value === 'all' ? true : data.color === value;
       return isSearchMatch && isFilterMatch;
     },
     [value, search]
@@ -25,7 +25,7 @@ export const generateItems = (num, nextWidth) => {
   const items = [];
   console.log(num)
   for (let i = 0; i < 1; i++) {
-    const color = oneOf(["red", "green", "blue"]);
+    const color = oneOf(['red', 'green', 'blue']);
     const width = nextWidth * 100;
     const height = 100;
 
@@ -54,7 +54,7 @@ export const options = {
   },
   dragRelease: {
     duration: 200,
-    easing: "ease-out"
+    easing: 'ease-out'
   },
   dragEnabled: true,
   dragContainer: document.body,
@@ -62,7 +62,7 @@ export const options = {
   dragPlaceholder: {
     enabled: true,
     createElement: function(item) {
-      // The element will have the Css class ".muuri-item-placeholder".
+      // The element will have the Css class '.muuri-item-placeholder'.
       return item.getElement().cloneNode(true);
     }
   },

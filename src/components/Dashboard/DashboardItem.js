@@ -6,7 +6,7 @@ const DashboardItem = ({ width, height, classExt, classHandle, children}) => (
       width,
       height,
     }}
-    className={`dashboard-item-wrapper ${classExt} ${classHandle}`}
+    className={`dashboard-item-wrapper ${classExt}`}
   >
     {children}
   </div>
@@ -14,7 +14,6 @@ const DashboardItem = ({ width, height, classExt, classHandle, children}) => (
 
 DashboardItem.defaultProps = {
   classExt: '',
-  classHandle: '',
   width: '100%',
   height: '100%'
 };

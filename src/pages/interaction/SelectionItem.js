@@ -12,21 +12,21 @@ const SelectionItem = ({ title, sub, des, classExt, onClose }) => (
       des ? 'selected-item--show' : 'selected-item--hidden'
     )}
   >
-    <div className="selected-item__header">
+    <div className='selected-item__header'>
       <IconButton
         onClick={onClose}
-        className="selected-item__close"
-        aria-label="close"
+        className='selected-item__close'
+        aria-label='close'
       >
-        <CloseIcon fontSize="small" />
+        <CloseIcon fontSize='small' />
       </IconButton>
     </div>
-    <div className="selected-item__content">
-      <div className="selected-item__title">{title}</div>
-      <div className="selected-item__sub">{sub}</div>
-      <div className="selected-item__des">{des}</div>
+    <div className='selected-item__content'>
+      <div className='selected-item__title'>{title}</div>
+      <div className='selected-item__sub'>{sub}</div>
+      <div className='selected-item__des'>{des}</div>
     </div>
-    <IconButton className="selected-item__more" aria-label="settings">
+    <IconButton className='selected-item__more' aria-label='settings'>
       <MoreVertIcon />
     </IconButton>
   </div>

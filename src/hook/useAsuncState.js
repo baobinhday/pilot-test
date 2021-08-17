@@ -7,7 +7,7 @@ const useAsyncState = (value) => {
     ref.current = newValue;
     forceRender((r) => !r);
   };
-  return [ref, updateState];
+  return [ref.current, updateState];
 };
 
 export default useAsyncState;

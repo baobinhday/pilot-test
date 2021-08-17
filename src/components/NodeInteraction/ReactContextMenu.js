@@ -8,7 +8,7 @@ import AbstractMenu from 'react-contextmenu/es6/AbstractMenu';
 import SubMenu from 'react-contextmenu/es6/SubMenu';
 import { hideMenu } from 'react-contextmenu/es6/actions';
 import { cssClasses, callIfExists, store } from 'react-contextmenu/es6/helpers';
-import "./reactContextMenu.scss"
+import './reactContextMenu.scss'
 
 export default class ReactContextMenu extends AbstractMenu {
   static propTypes = {
@@ -276,10 +276,10 @@ export default class ReactContextMenu extends AbstractMenu {
     });
 
     return (
-      <div className={isVisible ? "react-context-wrapper" : "react-context-wrapper react-context-wrapper--hidden"}>
+      <div className={isVisible ? 'react-context-wrapper' : 'react-context-wrapper react-context-wrapper--hidden'}>
         <nav
-          role="menu"
-          tabIndex="-1"
+          role='menu'
+          tabIndex='-1'
           ref={this.menuRef}
           style={inlineStyle}
           className={menuClassnames}

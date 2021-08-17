@@ -6,9 +6,10 @@ const ResizeDashboard = ({
   children,
   classExt,
   customOptions,
-  classHandle
+  classHandle,
+  customRef
 }) => (
-  <div className={`resize-dashboard-wrapper ${classExt}`}>
+  <div className={`resize-dashboard-wrapper ${classExt}`} ref={customRef}>
     <MuuriComponent
       {...options}
       {...customOptions}
@@ -19,10 +20,10 @@ const ResizeDashboard = ({
   </div>
 );
 
-ResizeDashboard.defaultsProps = {
+ResizeDashboard.defaultProps = {
   classExt: '',
   customOptions: {},
-  classHandle: 'resize-item-wrapper'
+  classHandle: 'dashboard-item-move'
 };
 
 export default ResizeDashboard;
@@ -33,7 +34,6 @@ const options = {
     minDragDistance: 5,
     minBounceBackAngle: Math.PI / 2,
   },
-  // dragStartPredicate: () => false,
   dragSortPredicate: {
     threshold: 40,
     action: 'move',
@@ -53,9 +53,8 @@ const options = {
       return item.getElement().cloneNode(true);
     },
   },
+  fillGaps: true,
   layout: {
-    fillGaps: true,
-    height: 1000,
     // horizontal: true,
   },
   layoutOnResize: true,

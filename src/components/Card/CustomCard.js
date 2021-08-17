@@ -22,12 +22,12 @@ const CustomCard = ({ classExt, card, children, ...other }) => {
     <Card
       onClick={onClickCard}
       className={classNames('custom-card', classExt)}
-      variant="outlined"
+      variant='outlined'
     >
       <CardHeader
         avatar={card.avatar}
         action={
-          <IconButton aria-label="settings">
+          <IconButton aria-label='settings'>
             <MoreVertIcon />
           </IconButton>
         }
