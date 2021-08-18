@@ -4,20 +4,25 @@ import { ResizableBox } from 'react-resizable';
 import { debounce } from 'underscore';
 import './resizableWrapper.scss';
 
-
 const ResizableWrapper = ({
-  width, height, dragable,
-  handleIcon, classWrapper,
-  resizable, gap, children,
-  ...others }) => {
-
+  width,
+  height,
+  dragable,
+  handleIcon,
+  classWrapper,
+  resizable,
+  gap,
+  children,
+  ...others
+}) => {
   const ref = useRef();
   const resizeRef = useRef();
   const refresh = useRefresh();
   const setDraggable = useDraggable();
 
   const [initSize, setInitSize] = useState({
-    width, height
+    width,
+    height,
   });
   const [, setResizing] = useState(false);
 
@@ -27,13 +32,23 @@ const ResizableWrapper = ({
   );
 
   const calculatorSize = (size) => {
-    let newWidth = size.width === initSize.width ? initSize.width : Math.floor((size.width + gap[0]) / gap[0]) * gap[0];
-    let newHeight = size.height === initSize.height ? initSize.height : Math.floor((size.height + gap[1]) / gap[1]) * gap[1];
-    newWidth = newWidth < others.minConstraints[0] ? others.minConstraints[0] : newWidth;
-    newHeight = newHeight < others.minConstraints[1] ? others.minConstraints[1] : newHeight;
+    let newWidth =
+      size.width === initSize.width
+        ? initSize.width
+        : Math.floor((size.width + gap[0]) / gap[0]) * gap[0];
+    let newHeight =
+      size.height === initSize.height
+        ? initSize.height
+        : Math.floor((size.height + gap[1]) / gap[1]) * gap[1];
+    newWidth =
+      newWidth < others.minConstraints[0] ? others.minConstraints[0] : newWidth;
+    newHeight =
+      newHeight < others.minConstraints[1]
+        ? others.minConstraints[1]
+        : newHeight;
     return {
       width: newWidth,
-      height: newHeight
+      height: newHeight,
     };
   };
 
@@ -41,8 +56,8 @@ const ResizableWrapper = ({
     refreshWithDebounce();
     if (ref.current) {
       const newSize = calculatorSize(size);
-      ref.current.style.width = newSize.width + 'px';
-      ref.current.style.height = newSize.height + 'px';
+      ref.current.style.width = `${newSize.width}px`;
+      ref.current.style.height = `${newSize.height}px`;
     }
   };
 
@@ -51,7 +66,7 @@ const ResizableWrapper = ({
       const newSize = calculatorSize(size);
       setInitSize({
         width: newSize.width,
-        height: newSize.height
+        height: newSize.height,
       });
       if (resizeRef.current.state.width < newSize.width) {
         resizeRef.current.state.width = newSize.width;
@@ -86,14 +101,14 @@ const ResizableWrapper = ({
           handle={resizable ? handleIcon : <div />}
           onResizeStop={onResizeStop}
           onResizeStart={onResizeStart}
-          { ...others }
+          {...others}
         >
-            <div className='react-resizable__item'>
-              {children}
-            </div>
+          <div className='react-resizable__item'>{children}</div>
         </ResizableBox>
       </div>
-      <div className='react-resizable__placehover'><div className='react-resizable__placehover__item' /></div>
+      <div className='react-resizable__placehover'>
+        <div className='react-resizable__placehover__item' />
+      </div>
     </div>
   );
 };
@@ -107,7 +122,7 @@ ResizableWrapper.defaultProps = {
   classWrapper: '',
   gap: [100, 100],
   dragable: false,
-  resizable: false
+  resizable: false,
 };
 
 export default ResizableWrapper;

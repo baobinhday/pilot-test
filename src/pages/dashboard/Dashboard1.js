@@ -2,9 +2,11 @@ import React from 'react';
 import { ResizeDashboard, ResizableWrapper } from 'components';
 import './dashboard.scss';
 import { LIST_CARD_1, RESIZE_OPTIONS } from './mockData';
+import CardSettings from 'pages/MenuSettings/MenuSettings';
 
 const Dashboard1 = () => (
   <div className='dashboard-1'>
+    <CardSettings />
     <ResizeDashboard
       classExt='dashboard-1-0'
     >

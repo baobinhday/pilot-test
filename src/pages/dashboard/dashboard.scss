@@ -2,7 +2,6 @@
   background: rgba(0, 0, 0, 0.08);
   padding: 5px;
 }
-
 .card-order {
   box-sizing: border-box;
   padding: 5px;
@@ -23,6 +22,12 @@
   background: rgba(0, 0, 0, 0.05);
 }
 
+.dashboard-1-0 {
+  .resize-wrapper {
+    cursor: default
+  }
+}
+
 .muuri-item-dragging {
   .card-order__parent {
     background: rgb(247, 200, 162);
@@ -33,4 +38,8 @@
   .react-resizable__placehover {
     padding: 5px;
   }
+}
+
+.card-menu-wrapper {
+  margin-left: 300px;
 }
