@@ -1,5 +1,5 @@
 import React from 'react';
-import { ResizeDashboard, DashboardItem, ResizableWrapper } from 'components';
+import { ResizeDashboard, ResizableWrapper } from 'components';
 import './dashboard.scss';
 import { LIST_CARD_1, RESIZE_OPTIONS } from './mockData';
 
@@ -12,46 +12,37 @@ const Dashboard1 = () => (
         width={200}
         height={200}
         { ...RESIZE_OPTIONS }
+        resizable
+        dragable={false}
       >
-        <DashboardItem
-          id={1}
-        >
-          <Item title={1} />
-        </DashboardItem>
+        <Item title={1} />
       </ResizableWrapper>
       <ResizableWrapper
         width={200}
         height={200}
         { ...RESIZE_OPTIONS }
+        resizable
+        dragable={false}
       >
-        <DashboardItem
-          id={2}
-        >
-          <Item title={2} />
-        </DashboardItem>
+        <Item title={2} />
       </ResizableWrapper>
       <ResizableWrapper
         width={200}
         height={200}
         { ...RESIZE_OPTIONS }
+        resizable
+        dragable={false}
       >
-        <DashboardItem
-          key={3}
-          id={3}
-        >
-          <Item title={3} />
-        </DashboardItem>
+        <Item title={3} />
       </ResizableWrapper>
       <ResizableWrapper
         width={200}
         height={200}
         { ...RESIZE_OPTIONS }
+        resizable
+        dragable={false}
       >
-        <DashboardItem
-          id={4}
-        >
-          <Item title={4} />
-        </DashboardItem>
+        <Item title={4} />
       </ResizableWrapper>
     </ResizeDashboard>
 
@@ -59,71 +50,71 @@ const Dashboard1 = () => (
       classExt='dasboard-1-1'
     >
       {LIST_CARD_1.map((item) => (
-        <DashboardItem
+        <ResizableWrapper
           key={item.id}
-          id={item.id}
           width={item.width}
           height={item.height}
+          { ...RESIZE_OPTIONS }
         >
           <Item title={item.title} />
-        </DashboardItem>
+        </ResizableWrapper>
       ))}
     </ResizeDashboard>
 
     <ResizeDashboard
       classExt='dashboard-1-2'
     >
-      <DashboardItem
-        id={1}
+      <ResizableWrapper
         width={400}
         height={200}
+        { ...RESIZE_OPTIONS }
       >
         <Item title={1} />
-      </DashboardItem>
-      <DashboardItem
-        id={2}
+      </ResizableWrapper>
+      <ResizableWrapper
         width={200}
         height={200}
+        { ...RESIZE_OPTIONS }
       >
         <Item title={2} />
-      </DashboardItem>
-      <DashboardItem
-        id={3}
+      </ResizableWrapper>
+      <ResizableWrapper
         width={400}
         height={200}
+        { ...RESIZE_OPTIONS }
       >
         <Item title={3} />
-      </DashboardItem>
-      <DashboardItem
-        id={4}
+      </ResizableWrapper>
+      <ResizableWrapper
         width={200}
         height={200}
+        { ...RESIZE_OPTIONS }
       >
         <Item title={4} />
-      </DashboardItem>
-      <DashboardItem
-        id={5}
+      </ResizableWrapper>
+      <ResizableWrapper
         width={200}
         height={200}
+        { ...RESIZE_OPTIONS }
       >
         <Item title={5} />
-      </DashboardItem>
-      <DashboardItem
-        key={6}
-        id={6}
+      </ResizableWrapper>
+      <ResizableWrapper
         width={200}
         height={200}
+        { ...RESIZE_OPTIONS }
       >
         <Item title={6} />
-      </DashboardItem>
-      <DashboardItem
-        id={7}
+      </ResizableWrapper>
+      <ResizableWrapper
         width={200}
         height={200}
+        { ...RESIZE_OPTIONS }
       >
         <Item title={7} />
-      </DashboardItem>
+      </ResizableWrapper>
     </ResizeDashboard>
+
   </div>
 );
 
@@ -131,6 +122,8 @@ export default Dashboard1;
 
 const Item = ({ title }) => (
   <div className='card-order dashboard-item-move'>
-    <div className='card-order__title'>{title}</div>
+    <div className='card-order__parent'>
+      <div className='card-order__title'>{title}</div>
+    </div>
   </div>
 );

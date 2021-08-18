@@ -53,9 +53,8 @@ const options = {
       return item.getElement().cloneNode(true);
     },
   },
-  fillGaps: true,
   layout: {
-    // horizontal: true,
+    fillGaps: true,
   },
   layoutOnResize: true,
   layoutDuration: 200,

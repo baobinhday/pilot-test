@@ -75,6 +75,9 @@
 
 .resize-wrapper {
   position: relative;
+  // z-index: 1;
+  will-change: transform;
+  cursor: pointer;
   .react-resizable__placehover {
     position: absolute;
     top: 0;

@@ -1,5 +1,4 @@
-.dashboard-item-wrapper {
-  z-index: 1;
-  will-change: transform;
-  cursor: pointer;
+.muuri-item-placeholder {
+  z-index: 2;
+  opacity: 0.5;
 }

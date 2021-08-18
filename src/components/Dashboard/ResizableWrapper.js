@@ -1,14 +1,20 @@
-import React, { useRef, useState } from 'react';
-import { useRefresh } from 'muuri-react';
+import React, { useRef, useState, useEffect } from 'react';
+import { useRefresh, useDraggable } from 'muuri-react';
 import { ResizableBox } from 'react-resizable';
 import { debounce } from 'underscore';
 import './resizableWrapper.scss';
 
-const ResizableWrapper = ({ width, height, handleIcon, classWrapper, gap, children, ...others }) => {
+
+const ResizableWrapper = ({
+  width, height, dragable,
+  handleIcon, classWrapper,
+  resizable, gap, children,
+  ...others }) => {
 
   const ref = useRef();
   const resizeRef = useRef();
   const refresh = useRefresh();
+  const setDraggable = useDraggable();
 
   const [initSize, setInitSize] = useState({
     width, height
@@ -57,10 +63,13 @@ const ResizableWrapper = ({ width, height, handleIcon, classWrapper, gap, childr
     }
   };
 
-  const onResizeStart = (e, { size }) => {
+  const onResizeStart = () => {
     setResizing(true);
   };
 
+  useEffect(() => {
+    setDraggable(dragable);
+  }, [setDraggable, dragable]);
 
   return (
     <div
@@ -74,7 +83,7 @@ const ResizableWrapper = ({ width, height, handleIcon, classWrapper, gap, childr
           width={initSize.width}
           height={initSize.height}
           onResize={onResize}
-          handle={handleIcon}
+          handle={resizable ? handleIcon : <div />}
           onResizeStop={onResizeStop}
           onResizeStart={onResizeStart}
           { ...others }
@@ -96,7 +105,9 @@ ResizableWrapper.defaultProps = {
   height: '100',
   resizeHandles: ['sw', 'se', 'nw', 'ne', 'w', 'e', 'n', 's'],
   classWrapper: '',
-  gap: [100, 100]
+  gap: [100, 100],
+  dragable: false,
+  resizable: false
 };
 
 export default ResizableWrapper;
